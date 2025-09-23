@@ -2,6 +2,8 @@
 let textBox = document.getElementById("text");
 let cuantityIndicator = document.getElementById("quantity-indicator");
 
+//Tooltip clipboard
+let tooltip = document.getElementById("tooltip");
 
 //Botones
 let quantityInput = document.getElementById("quantity");
@@ -14,9 +16,15 @@ let quantitySlider = document.getElementById("quantity");
 
 //Event listeners
 quantitySlider.addEventListener("input", generarPiramide);
-quantitySlider.addEventListener("mouseup", function(){ cuantityIndicator.style.visibility = "hidden"; }); 
-
+quantitySlider.addEventListener("mouseup", function () {
+  cuantityIndicator.style.visibility = "hidden";
+});
 fontSlider.addEventListener("input", cambiarTamanioTexto);
+textBox.addEventListener("click", copiarTexto);
+textBox.addEventListener("mouseover", mostrarTooltip);
+textBox.addEventListener("mouseout", function () {
+  tooltip.style.visibility = "hidden";
+});
 
 generarPiramide();
 
@@ -33,6 +41,7 @@ function generarPiramide() {
   textBox.innerText = piramide(altura);
   cuantityIndicator.innerHTML = altura;
   cuantityIndicator.style.visibility = "visible";
+  tooltip.innerText = "Click para copiar!";
 }
 
 function piramide(i) {
@@ -64,4 +73,18 @@ function piramide(i) {
   }
 
   return piramideString;
+}
+
+function copiarTexto() {
+  navigator.clipboard.writeText(textBox.innerText);
+  mostrarTooltip();
+  tooltip.innerText = "Texto copiado!";
+  
+}
+
+function mostrarTooltip () {
+  tooltip.style.visibility = "visible";
+  setTimeout(() => {
+    tooltip.style.visibility = "hidden";
+  }, 2000);
 }

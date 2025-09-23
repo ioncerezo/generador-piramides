@@ -27,6 +27,7 @@ label {
   margin-inline: auto;
   font-family: monospace;
   letter-spacing: 1.2px;
+  cursor: pointer;
 }
 
 #text {
@@ -34,7 +35,7 @@ label {
   background-color: rgb(223, 223, 223);
   padding-inline: 24px;
 }
-   
+
 
 #quantity-indicator {
   visibility: hidden;  
@@ -43,4 +44,11 @@ label {
   padding-left: 5px;
 }
 
-
+#tooltip{
+    margin-top: 20px;
+    width: fit-content;
+    font-size: 12px;
+    padding: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.24);
+    background-color: rgb(111, 165, 236);
+}
