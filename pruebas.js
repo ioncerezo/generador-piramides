@@ -50,7 +50,7 @@ function piramide(i) {
     }
 
     //Dibuja el espacio sobrante
-    for (let y = 0; y < espacio - 1; y++) {
+    for (let y = 0; y < espacio; y++) {
       piramideString += "\xa0"; //codigo de la tecla espacio
     }
 
