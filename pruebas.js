@@ -1,5 +1,7 @@
 //Area de texto
 let textBox = document.getElementById("text");
+let cuantityIndicator = document.getElementById("quantity-indicator");
+
 
 //Botones
 let quantityInput = document.getElementById("quantity");
@@ -20,6 +22,7 @@ generarPiramide();
 function cambiarTamanioTexto() {
   console.log(fontSlider.value);
   textBox.style.fontSize = fontSlider.value + "px";
+  cuantityIndicator.style.fontSize = fontSlider.value + "px";
 }
 
 
