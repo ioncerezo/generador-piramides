@@ -5,6 +5,10 @@ let cuantityIndicator = document.getElementById("quantity-indicator");
 //Tooltip clipboard
 let tooltip = document.getElementById("tooltip");
 
+//Selector ladrillo (caracter)
+
+let caracterInput = document.getElementById("char");
+
 //Botones
 let quantityInput = document.getElementById("quantity");
 let generarBtn = document.getElementById("generarBtn");
@@ -16,6 +20,7 @@ let quantitySlider = document.getElementById("quantity");
 
 //Event listeners
 quantitySlider.addEventListener("input", generarPiramide);
+caracterInput.addEventListener("input", generarPiramide);
 quantitySlider.addEventListener("mouseup", function () {
   cuantityIndicator.style.visibility = "hidden";
 });
@@ -25,6 +30,7 @@ textBox.addEventListener("mouseover", mostrarTooltip);
 textBox.addEventListener("mouseout", function () {
   tooltip.style.visibility = "hidden";
 });
+
 
 generarPiramide();
 
@@ -36,15 +42,15 @@ function cambiarTamanioTexto() {
 function generarPiramide() {
   //Obtener altura
   let altura = Number(quantityInput.value);
-
+  let char = caracterInput.value;
   //Actualizar valores
-  textBox.innerText = piramide(altura);
+  textBox.innerText = piramide(altura, char);
   cuantityIndicator.innerHTML = altura;
   cuantityIndicator.style.visibility = "visible";
   tooltip.innerText = "Click para copiar!";
 }
 
-function piramide(i) {
+function piramide(i, char) {
   let piramideString = "";
   let altura = Number(i);
   let ladrillo = 1;
@@ -59,7 +65,7 @@ function piramide(i) {
 
     //Dibuja los ladrillos
     for (let y = 0; y < ladrillo; y++) {
-      piramideString += "*";
+      piramideString += char;
     }
 
     //Dibuja el espacio sobrante
@@ -79,10 +85,9 @@ function copiarTexto() {
   navigator.clipboard.writeText(textBox.innerText);
   mostrarTooltip();
   tooltip.innerText = "Texto copiado!";
-  
 }
 
-function mostrarTooltip () {
+function mostrarTooltip() {
   tooltip.style.visibility = "visible";
   setTimeout(() => {
     tooltip.style.visibility = "hidden";
