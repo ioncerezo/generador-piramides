@@ -23,19 +23,23 @@ label {
 }
 
 #box {
-  margin-top: 25px;
   width: fit-content;
   margin-inline: auto;
-  border: 1px solid rgba(0, 0, 0, 0.24);
-  background-color: rgb(223, 223, 223);
   font-family: monospace;
   letter-spacing: 1.2px;
-  padding: 16px;
 }
 
-#quantity-indicator {
-  position: fixed;
+#text {
+  border: 1px solid rgba(0, 0, 0, 0.24);
+  background-color: rgb(223, 223, 223);
+  padding-inline: 24px;
+}
+   
 
+#quantity-indicator {  
+  position: absolute;
+  margin: 0;
+  padding-left: 5px;
 }
 
 
