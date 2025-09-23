@@ -1,3 +1,219 @@
+const allChars = [
+  "!",
+  '"',
+  "#",
+  "$",
+  "%",
+  "&",
+  "'",
+  "(",
+  ")",
+  "*",
+  "+",
+  ",",
+  "-",
+  ".",
+  "/",
+  "0",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  ":",
+  ";",
+  "<",
+  "=",
+  ">",
+  "?",
+  "@",
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
+  "[",
+  "\\",
+  "]",
+  "^",
+  "_",
+  "`",
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
+  "{",
+  "|",
+  "}",
+  "~",
+  "¡",
+  "¢",
+  "£",
+  "¤",
+  "¥",
+  "¦",
+  "§",
+  "¨",
+  "©",
+  "ª",
+  "«",
+  "¬",
+  "®",
+  "¯",
+  "°",
+  "±",
+  "²",
+  "³",
+  "´",
+  "µ",
+  "¶",
+  "·",
+  "¸",
+  "¹",
+  "º",
+  "»",
+  "¼",
+  "½",
+  "¾",
+  "¿",
+  "À",
+  "Á",
+  "Â",
+  "Ã",
+  "Ä",
+  "Å",
+  "Æ",
+  "Ç",
+  "È",
+  "É",
+  "Ê",
+  "Ë",
+  "Ì",
+  "Í",
+  "Î",
+  "Ï",
+  "Ð",
+  "Ñ",
+  "Ò",
+  "Ó",
+  "Ô",
+  "Õ",
+  "Ö",
+  "×",
+  "Ø",
+  "Ù",
+  "Ú",
+  "Û",
+  "Ü",
+  "Ý",
+  "Þ",
+  "ß",
+  "à",
+  "á",
+  "â",
+  "ã",
+  "ä",
+  "å",
+  "æ",
+  "ç",
+  "è",
+  "é",
+  "ê",
+  "ë",
+  "ì",
+  "í",
+  "î",
+  "ï",
+  "ð",
+  "ñ",
+  "ò",
+  "ó",
+  "ô",
+  "õ",
+  "ö",
+  "÷",
+  "ø",
+  "ù",
+  "ú",
+  "û",
+  "ü",
+  "ý",
+  "þ",
+  "ÿ",
+  "€",
+  "‚",
+  "„",
+  "†",
+  "‡",
+  "•",
+  "…",
+  "‰",
+  "‹",
+  "›",
+  "€",
+  "™",
+  "Š",
+  "š",
+  "Œ",
+  "œ",
+  "Ÿ",
+  "Ž",
+  "ž",
+  "‘",
+  "’",
+  "“",
+  "”",
+  "–",
+  "—",
+];
+
 //Area de texto
 let textBox = document.getElementById("text");
 let cuantityIndicator = document.getElementById("quantity-indicator");
@@ -5,34 +221,33 @@ let cuantityIndicator = document.getElementById("quantity-indicator");
 //Tooltip clipboard
 let tooltip = document.getElementById("tooltip");
 
-//Selector ladrillo (caracter)
-
+//Selectores
 let caracterInput = document.getElementById("char");
-
-//Botones
 let quantityInput = document.getElementById("quantity");
-let generarBtn = document.getElementById("generarBtn");
-let resetBtn = document.getElementById("resetBtn");
-
-//Slider
+let form = document.getElementById("form");
+let randomBtn = document.getElementById("randomCaracterBtn");
 let fontSlider = document.getElementById("size");
 let quantitySlider = document.getElementById("quantity");
 
 //Event listeners
 quantitySlider.addEventListener("input", generarPiramide);
 caracterInput.addEventListener("input", generarPiramide);
-quantitySlider.addEventListener("mouseup", function () {
-  cuantityIndicator.style.visibility = "hidden";
-});
+quantitySlider.addEventListener("mouseup", function () { cuantityIndicator.style.visibility = "hidden"; });
+quantitySlider.addEventListener("mousedown", function () { cuantityIndicator.style.visibility = "visible"; });
 fontSlider.addEventListener("input", cambiarTamanioTexto);
 textBox.addEventListener("click", copiarTexto);
 textBox.addEventListener("mouseover", mostrarTooltip);
-textBox.addEventListener("mouseout", function () {
-  tooltip.style.visibility = "hidden";
-});
-
+textBox.addEventListener("mouseout", function () { tooltip.style.visibility = "hidden"; });
+form.addEventListener("submit", function (event) { event.preventDefault();});
+randomBtn.addEventListener("click", caracterAleatorio);
 
 generarPiramide();
+
+function caracterAleatorio() {
+  let randomNumber = Math.floor(Math.random() * allChars.length -1);
+  caracterInput.value = allChars[randomNumber][0];
+  generarPiramide();
+}
 
 function cambiarTamanioTexto() {
   textBox.style.fontSize = fontSlider.value + "px";
@@ -46,7 +261,6 @@ function generarPiramide() {
   //Actualizar valores
   textBox.innerText = piramide(altura, char);
   cuantityIndicator.innerHTML = altura;
-  cuantityIndicator.style.visibility = "visible";
   tooltip.innerText = "Click para copiar!";
 }
 
