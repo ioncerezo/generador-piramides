@@ -1,5 +1,5 @@
 //Area de texto
-let box = document.getElementById("box");
+let textBox = document.getElementById("text");
 
 //Botones
 let quantityInput = document.getElementById("quantity");
@@ -19,13 +19,13 @@ generarPiramide();
 
 function cambiarTamanioTexto() {
   console.log(fontSlider.value);
-  box.style.fontSize = fontSlider.value + "px";
+  textBox.style.fontSize = fontSlider.value + "px";
 }
 
 
 function generarPiramide() {
   let altura = Number(quantityInput.value);
-  box.innerText = piramide(altura);
+  textBox.innerText = piramide(altura);
 }
 
 function piramide(i) {
