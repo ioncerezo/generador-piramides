@@ -213,40 +213,83 @@ const allChars = [
   "–",
   "—",
 ];
+//Shine button boolean
+let isShining = false;
 
 //Area de texto
 let textBox = document.getElementById("text");
-let cuantityIndicator = document.getElementById("quantity-indicator");
 
 //Tooltip clipboard
 let tooltip = document.getElementById("tooltip");
 
 //Selectores
 let caracterInput = document.getElementById("char");
-let quantityInput = document.getElementById("quantity");
 let form = document.getElementById("form");
-let randomBtn = document.getElementById("randomCaracterBtn");
+let randomCaracterBtn = document.getElementById("randomCaracterBtn");
+let shineBtn = document.getElementById("shineBtn");
 let fontSlider = document.getElementById("size");
 let quantitySlider = document.getElementById("quantity");
 
 //Event listeners
 quantitySlider.addEventListener("input", generarPiramide);
 caracterInput.addEventListener("input", generarPiramide);
-quantitySlider.addEventListener("mouseup", function () { cuantityIndicator.style.visibility = "hidden"; });
-quantitySlider.addEventListener("mousedown", function () { cuantityIndicator.style.visibility = "visible"; });
+quantitySlider.addEventListener("mouseup", function () {
+  cuantityIndicator.style.visibility = "hidden";
+});
+quantitySlider.addEventListener("mousedown", function () {
+  cuantityIndicator.style.visibility = "visible";
+});
 fontSlider.addEventListener("input", cambiarTamanioTexto);
 textBox.addEventListener("click", copiarTexto);
 textBox.addEventListener("mouseover", mostrarTooltip);
-textBox.addEventListener("mouseout", function () { tooltip.style.visibility = "hidden"; });
-form.addEventListener("submit", function (event) { event.preventDefault();});
-randomBtn.addEventListener("click", caracterAleatorio);
+
+textBox.addEventListener("mouseout", function () {
+  tooltip.style.visibility = "hidden";
+});
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+});
+randomCaracterBtn.addEventListener("click", caracterAleatorio);
+shineBtn.addEventListener("click", function () {
+  isShining = !isShining;
+  if (isShining) {
+    textBox.style.fontWeight = 800;
+    shineBtn.style.fontWeight = 800;
+    document.addEventListener("mousemove", colorAleatorio);
+  } else {
+    document.removeEventListener("mousemove", colorAleatorio);
+    textBox.style.color = "inherit";
+    shineBtn.style.color = "inherit";
+    textBox.style.fontWeight = 200;
+    shineBtn.style.fontWeight = 200;
+    quantitySlider.style.setProperty("--slider-color", "#007bff");
+    fontSlider.style.setProperty("--slider-color", "#007bff");
+  }
+});
 
 generarPiramide();
 
+function colorAleatorio() {
+  let color = getRandomColor();
+  textBox.style.color = color;
+  shineBtn.style.color = color;
+  quantitySlider.style.setProperty("--slider-color", color);
+  fontSlider.style.setProperty("--slider-color", color);
+}
+
 function caracterAleatorio() {
-  let randomNumber = Math.floor(Math.random() * allChars.length -1);
+  let randomNumber = Math.floor(Math.random() * allChars.length - 1);
   caracterInput.value = allChars[randomNumber][0];
   generarPiramide();
+}
+
+function getRandomColor() {
+  let letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }
 
 function cambiarTamanioTexto() {
@@ -256,7 +299,7 @@ function cambiarTamanioTexto() {
 
 function generarPiramide() {
   //Obtener altura
-  let altura = Number(quantityInput.value);
+  let altura = Number(quantitySlider.value);
   let char = caracterInput.value;
   //Actualizar valores
   textBox.innerText = piramide(altura, char);

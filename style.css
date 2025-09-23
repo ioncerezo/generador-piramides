@@ -24,10 +24,38 @@ label {
   margin-left: 8px;
 }
 
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: #ddd;
+  border-radius: 3px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--slider-color, #007bff);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--slider-color, #007bff);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
 #char {
   width: 20px;
   height: 20px;
-  
 }
 
 #box {
@@ -42,6 +70,11 @@ label {
   border: 1px solid rgba(0, 0, 0, 0.24);
   background-color: rgb(223, 223, 223);
   padding-inline: 24px;
+}
+
+#text,
+#shineBtn {
+  transition: color 0.3s, background 0.3s;
 }
 
 #quantity-indicator {
