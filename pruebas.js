@@ -14,7 +14,7 @@ let quantitySlider = document.getElementById("quantity");
 
 //Event listeners
 quantitySlider.addEventListener("input", generarPiramide);
-quantitySlider.addEventListener("mouseout", function(){ cuantityIndicator.style.visibility = "hidden"; }); 
+quantitySlider.addEventListener("mouseup", function(){ cuantityIndicator.style.visibility = "hidden"; }); 
 
 fontSlider.addEventListener("input", cambiarTamanioTexto);
 
