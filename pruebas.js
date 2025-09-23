@@ -12,7 +12,6 @@ let resetBtn = document.getElementById("resetBtn");
 let fontSlider = document.getElementById("size");
 let quantitySlider = document.getElementById("quantity");
 
-
 //Event listeners
 quantitySlider.addEventListener("input", generarPiramide);
 fontSlider.addEventListener("input", cambiarTamanioTexto);
@@ -25,19 +24,19 @@ function cambiarTamanioTexto() {
   cuantityIndicator.style.fontSize = fontSlider.value + "px";
 }
 
-
 function generarPiramide() {
   let altura = Number(quantityInput.value);
   textBox.innerText = piramide(altura);
+  cuantityIndicator.innerHTML = altura;
 }
 
 function piramide(i) {
   let piramideString = "";
-
   let altura = Number(i);
-
   let ladrillo = 1;
+
   let espacio = altura - 1;
+  
   for (let i = 0; i < altura; i++) {
     //Dibuja los primeros huecos
     for (let y = 0; y < espacio; y++) {
