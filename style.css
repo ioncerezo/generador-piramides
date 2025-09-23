@@ -49,6 +49,6 @@ label {
     width: fit-content;
     font-size: 12px;
     padding: 4px;
-    border: 1px solid rgba(0, 0, 0, 0.24);
-    background-color: rgb(111, 165, 236);
+    
+    margin: auto;
 }
