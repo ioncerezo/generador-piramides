@@ -36,7 +36,8 @@ label {
 }
    
 
-#quantity-indicator {  
+#quantity-indicator {
+  visibility: hidden;  
   position: absolute;
   margin: 0;
   padding-left: 5px;

@@ -14,20 +14,25 @@ let quantitySlider = document.getElementById("quantity");
 
 //Event listeners
 quantitySlider.addEventListener("input", generarPiramide);
+quantitySlider.addEventListener("mouseout", function(){ cuantityIndicator.style.visibility = "hidden"; }); 
+
 fontSlider.addEventListener("input", cambiarTamanioTexto);
 
 generarPiramide();
 
 function cambiarTamanioTexto() {
-  console.log(fontSlider.value);
   textBox.style.fontSize = fontSlider.value + "px";
   cuantityIndicator.style.fontSize = fontSlider.value + "px";
 }
 
 function generarPiramide() {
+  //Obtener altura
   let altura = Number(quantityInput.value);
+
+  //Actualizar valores
   textBox.innerText = piramide(altura);
   cuantityIndicator.innerHTML = altura;
+  cuantityIndicator.style.visibility = "visible";
 }
 
 function piramide(i) {
@@ -36,7 +41,7 @@ function piramide(i) {
   let ladrillo = 1;
 
   let espacio = altura - 1;
-  
+
   for (let i = 0; i < altura; i++) {
     //Dibuja los primeros huecos
     for (let y = 0; y < espacio; y++) {
