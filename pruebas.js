@@ -231,39 +231,49 @@ const fontSlider = document.getElementById("size");
 const quantitySlider = document.getElementById("quantity");
 const quantityIndicator = document.getElementById("quantity-indicator");
 
-// Event listeners
+//Event listeners
 quantitySlider.addEventListener("input", generarPiramide);
 caracterInput.addEventListener("input", generarPiramide);
 
-quantitySlider.addEventListener("mouseup", function () {
-  quantityIndicator.style.visibility = "hidden";
-});
-quantitySlider.addEventListener("mousedown", function () {
+quantitySlider.addEventListener("focus", () => {
   quantityIndicator.style.visibility = "visible";
 });
+quantitySlider.addEventListener("blur", () => {
+  quantityIndicator.style.visibility = "hidden";
+});
+quantitySlider.addEventListener("mousedown", () => {
+  quantityIndicator.style.visibility = "visible";
+});
+quantitySlider.addEventListener("mouseup", () => {
+  quantityIndicator.style.visibility = "hidden";
+});
+
 fontSlider.addEventListener("input", cambiarTamanioTexto);
+
 textBox.addEventListener("click", copiarTexto);
 textBox.addEventListener("mouseover", mostrarTooltip);
-
-textBox.addEventListener("mouseout", function () {
+textBox.addEventListener("mouseout", () => {
   tooltip.style.visibility = "hidden";
 });
-form.addEventListener("submit", function (event) {
+
+form.addEventListener("submit", (event) => {
   event.preventDefault();
 });
+
 randomCaracterBtn.addEventListener("click", caracterAleatorio);
-shineBtn.addEventListener("click", function () {
+
+shineBtn.addEventListener("click", () => {
   isShining = !isShining;
   if (isShining) {
-    textBox.style.fontWeight = 800;
-    shineBtn.style.fontWeight = 800;
+    textBox.style.fontWeight = "800";
+    shineBtn.style.fontWeight = "800";
     document.addEventListener("mousemove", colorAleatorio);
   } else {
     document.removeEventListener("mousemove", colorAleatorio);
-    textBox.style.color = "inherit";
-    shineBtn.style.color = "inherit";
-    textBox.style.fontWeight = 200;
-    shineBtn.style.fontWeight = 200;
+    textBox.style.color = "";
+    shineBtn.style.color = "";
+    textBox.style.fontWeight = "200";
+    shineBtn.style.fontWeight = "200";
     quantitySlider.style.setProperty("--slider-color", "#007bff");
     fontSlider.style.setProperty("--slider-color", "#007bff");
   }
@@ -300,10 +310,8 @@ function cambiarTamanioTexto() {
 }
 
 function generarPiramide() {
-  // Obtener altura
   const altura = Number(quantitySlider.value);
-  const char = caracterInput.value;
-  // Actualizar valores
+  const char = caracterInput.value || "*";
   textBox.textContent = piramide(altura, char);
   quantityIndicator.textContent = altura;
   tooltip.textContent = "Click para copiar!";
@@ -316,18 +324,9 @@ function piramide(i, char) {
   let espacio = altura - 1;
 
   for (let i = 0; i < altura; i++) {
-    // Dibuja los primeros huecos
-    for (let y = 0; y < espacio; y++) {
-      piramideString += "\xa0";
-    }
-    // Dibuja los ladrillos
-    for (let y = 0; y < ladrillo; y++) {
-      piramideString += char;
-    }
-    // Dibuja el espacio sobrante
-    for (let y = 0; y < espacio; y++) {
-      piramideString += "\xa0";
-    }
+    piramideString += "\xa0".repeat(espacio);
+    piramideString += char.repeat(ladrillo);
+    piramideString += "\xa0".repeat(espacio);
     espacio -= 1;
     ladrillo += 2;
     piramideString += "\n";
