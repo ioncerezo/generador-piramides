@@ -2,6 +2,7 @@
 
 Este proyecto es una aplicación web sencilla que permite generar pirámides de caracteres personalizables. Puedes elegir la altura, el tamaño de letra y el carácter con el que se construye la pirámide. Además, incluye funciones para seleccionar un carácter aleatorio y aplicar un efecto visual de brillo.
 
+![Captura de pantalla de la app en funcionamiento](https://github.com/ioncerezo/generador-piramides/blob/main/images/screenshot.png) "Captura de pantalla")
 ## Cómo usar
 
 1. Abre `index.html` en tu navegador.
