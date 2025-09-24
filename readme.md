@@ -2,17 +2,6 @@
 
 Este proyecto es una aplicación web sencilla que permite generar pirámides de caracteres personalizables. Puedes elegir la altura, el tamaño de letra y el carácter con el que se construye la pirámide. Además, incluye funciones para seleccionar un carácter aleatorio y aplicar un efecto visual de brillo.
 
-## Archivos principales
-
-- **index.html**  
-  Estructura principal de la página y formulario de controles.
-
-- **style.css**  
-  Estilos para la presentación y accesibilidad de la aplicación.
-
-- **main.js**  
-  Lógica de generación de la pirámide y manejo de eventos de la interfaz.
-
 ## Cómo usar
 
 1. Abre `index.html` en tu navegador.
