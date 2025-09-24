@@ -95,6 +95,7 @@ input[type="range"]::-moz-range-thumb {
   padding-inline: 1.5em;
   font-size: 1em;
   white-space: pre;
+  border-radius: 2px;
 }
 
 #text:focus-visible {
