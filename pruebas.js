@@ -213,31 +213,33 @@ const allChars = [
   "–",
   "—",
 ];
-//Shine button boolean
+// Shine button boolean
 let isShining = false;
 
-//Area de texto
-let textBox = document.getElementById("text");
+// Área de texto
+const textBox = document.getElementById("text");
 
-//Tooltip clipboard
-let tooltip = document.getElementById("tooltip");
+// Tooltip clipboard
+const tooltip = document.getElementById("tooltip");
 
-//Selectores
-let caracterInput = document.getElementById("char");
-let form = document.getElementById("form");
-let randomCaracterBtn = document.getElementById("randomCaracterBtn");
-let shineBtn = document.getElementById("shineBtn");
-let fontSlider = document.getElementById("size");
-let quantitySlider = document.getElementById("quantity");
+// Selectores
+const caracterInput = document.getElementById("char");
+const form = document.getElementById("form");
+const randomCaracterBtn = document.getElementById("randomCaracterBtn");
+const shineBtn = document.getElementById("shineBtn");
+const fontSlider = document.getElementById("size");
+const quantitySlider = document.getElementById("quantity");
+const quantityIndicator = document.getElementById("quantity-indicator");
 
-//Event listeners
+// Event listeners
 quantitySlider.addEventListener("input", generarPiramide);
 caracterInput.addEventListener("input", generarPiramide);
+
 quantitySlider.addEventListener("mouseup", function () {
-  cuantityIndicator.style.visibility = "hidden";
+  quantityIndicator.style.visibility = "hidden";
 });
 quantitySlider.addEventListener("mousedown", function () {
-  cuantityIndicator.style.visibility = "visible";
+  quantityIndicator.style.visibility = "visible";
 });
 fontSlider.addEventListener("input", cambiarTamanioTexto);
 textBox.addEventListener("click", copiarTexto);
@@ -270,7 +272,7 @@ shineBtn.addEventListener("click", function () {
 generarPiramide();
 
 function colorAleatorio() {
-  let color = getRandomColor();
+  const color = getRandomColor();
   textBox.style.color = color;
   shineBtn.style.color = color;
   quantitySlider.style.setProperty("--slider-color", color);
@@ -278,13 +280,13 @@ function colorAleatorio() {
 }
 
 function caracterAleatorio() {
-  let randomNumber = Math.floor(Math.random() * allChars.length - 1);
+  const randomNumber = Math.floor(Math.random() * allChars.length);
   caracterInput.value = allChars[randomNumber][0];
   generarPiramide();
 }
 
 function getRandomColor() {
-  let letters = "0123456789ABCDEF";
+  const letters = "0123456789ABCDEF";
   let color = "#";
   for (let i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)];
@@ -294,54 +296,50 @@ function getRandomColor() {
 
 function cambiarTamanioTexto() {
   textBox.style.fontSize = fontSlider.value + "px";
-  cuantityIndicator.style.fontSize = fontSlider.value + "px";
+  quantityIndicator.style.fontSize = fontSlider.value + "px";
 }
 
 function generarPiramide() {
-  //Obtener altura
-  let altura = Number(quantitySlider.value);
-  let char = caracterInput.value;
-  //Actualizar valores
-  textBox.innerText = piramide(altura, char);
-  cuantityIndicator.innerHTML = altura;
-  tooltip.innerText = "Click para copiar!";
+  // Obtener altura
+  const altura = Number(quantitySlider.value);
+  const char = caracterInput.value;
+  // Actualizar valores
+  textBox.textContent = piramide(altura, char);
+  quantityIndicator.textContent = altura;
+  tooltip.textContent = "Click para copiar!";
 }
 
 function piramide(i, char) {
   let piramideString = "";
   let altura = Number(i);
   let ladrillo = 1;
-
   let espacio = altura - 1;
 
   for (let i = 0; i < altura; i++) {
-    //Dibuja los primeros huecos
+    // Dibuja los primeros huecos
     for (let y = 0; y < espacio; y++) {
-      piramideString += "\xa0"; //codigo de la tecla espacio
+      piramideString += "\xa0";
     }
-
-    //Dibuja los ladrillos
+    // Dibuja los ladrillos
     for (let y = 0; y < ladrillo; y++) {
       piramideString += char;
     }
-
-    //Dibuja el espacio sobrante
+    // Dibuja el espacio sobrante
     for (let y = 0; y < espacio; y++) {
-      piramideString += "\xa0"; //codigo de la tecla espacio
+      piramideString += "\xa0";
     }
-
     espacio -= 1;
     ladrillo += 2;
     piramideString += "\n";
   }
-
   return piramideString;
 }
 
 function copiarTexto() {
-  navigator.clipboard.writeText(textBox.innerText);
+  navigator.clipboard.writeText(textBox.textContent);
   mostrarTooltip();
-  tooltip.innerText = "Texto copiado!";
+  tooltip.textContent = "Texto copiado!";
+  textBox.focus();
 }
 
 function mostrarTooltip() {
