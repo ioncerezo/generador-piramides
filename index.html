@@ -3,29 +3,55 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pruebas JS</title>
+    <title>Generador piramides</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <main>
       <h1>Generador de piramides</h1>
-      <form id="form">
+      <form id="form" autocomplete="off">
         <label for="quantity">Altura de la piramide: </label>
-        <input type="range" id="quantity" min="1" max="99" value="3" step="1" />
+        <input
+          type="range"
+          id="quantity"
+          min="1"
+          max="99"
+          value="3"
+          step="1"
+          aria-valuemin="1"
+          aria-valuemax="99"
+          aria-valuenow="3"
+        />
         <label for="size">Tamaño de letra: </label>
-        <input type="range" id="size" min="4" max="60" value="12" step="1" />
+        <input
+          type="range"
+          id="size"
+          min="4"
+          max="60"
+          value="12"
+          step="1"
+          aria-valuemin="4"
+          aria-valuemax="60"
+          aria-valuenow="12"
+        />
         <label for="char">Carácter: </label>
-        <input type="text" id="char" maxlength="1" value="*" />
-        <button id="randomCaracterBtn">Carácter aleatorio</button>
-        <button id="shineBtn">Shine!</button>
+        <input
+          type="text"
+          id="char"
+          maxlength="1"
+          value="*"
+          aria-label="Carácter para la pirámide"
+        />
+        <button id="randomCaracterBtn" type="button">Carácter aleatorio</button>
+        <button id="shineBtn" type="button">Shine!</button>
       </form>
     </main>
 
-    <article id="box">
-      <p id="quantity-indicator"></p>
-      <p id="text"></p>
+    <article id="box" tabindex="0" aria-label="Pirámide generada">
+      <p id="quantity-indicator" aria-live="polite"></p>
+      <pre id="text" tabindex="0"></pre>
     </article>
-    <div id="tooltip">Click para copiar!</div>
+    <div id="tooltip" role="status" aria-live="polite">Click para copiar!</div>
   </body>
   <script src="pruebas.js"></script>
 </html>
